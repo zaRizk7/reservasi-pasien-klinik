@@ -6,5 +6,6 @@
   <li>Using CodeIgniter Framework</li>
   <li>Using MySQL Database</li>
   <li>Using Bootstrap</li>
+  <li>Data from database loaded as JSON</li>
 <ol>
   </p>
