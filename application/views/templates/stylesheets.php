@@ -16,7 +16,7 @@
 	}
 
 	.navbar {
-		min-height: 6rem;
+		min-height: 4.5rem;
 	}
 
 	.nav-form {
