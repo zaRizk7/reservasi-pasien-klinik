@@ -1,4 +1,4 @@
-<nav class="navbar navbar-dark fixed-top navbar-expand-lg bg-success">
+<nav class="navbar navbar-light fixed-top navbar-expand-lg bg-light">
 	<div class="container">
 
 		<a class="navbar-brand" href="#">ServeHealth</a>
@@ -18,11 +18,19 @@
 					<a class="nav-link" href="#">Register</a>
 				</li>
 			</ul>
-			<form class="form-inline col-auto" method="POST">
-				<input type="text" name="username" id="username-field" class="form-control mr-2" placeholder="Username">
-				<input type="password" name="password" id="password-field" class="form-control mr-2" placeholder="Password">
-				<button class="btn btn-outline-light" type="submit">Login</button>
-			</form>
+			<?php if ($this->session->userdata('username')) : ?>
+				<form class="form-inline" method="POST" action="<?= site_url('auth/logout') ?>">
+					<button class="btn btn-outline-dark" type="submit">Logout</button>
+				</form>
+			<?php else : ?>
+				<form class="form-inline" method="POST" action="<?= site_url('auth/login') ?>">
+					<div class="nav-form mr-2">
+						<input type="text" name="username" id="username-field" class="form-control" placeholder="Username">
+						<input type="password" name="password" id="password-field" class="form-control" placeholder="Password">
+					</div>
+					<button class="btn btn-outline-dark" type="submit">Login</button>
+				</form>
+			<?php endif; ?>
 		</div>
 
 	</div>
