@@ -21,7 +21,6 @@
 	}
 
 	.nav-form {
-		background: #343A40;
 		border: 2px solid rgb(150, 150, 150);
 		border-radius: 8px;
 	}
@@ -57,5 +56,9 @@
 		width: 100%;
 		height: 60px;
 		line-height: 60px;
+	}
+
+	.text-muted i {
+		margin: 0 8px;
 	}
 </style>

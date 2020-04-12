@@ -20,14 +20,14 @@
 			</ul>
 			<?php if ($this->session->userdata('username')) : ?>
 				<form class="form-inline" method="POST" action="<?= site_url('auth/logout') ?>">
-					<div class="nav-form">
+					<div class="nav-form bg-dark">
 						<span class="logged-in">Welcome <?= $this->session->userdata('username') ?></span>
 						<button class="btn btn-outline-light" type="submit">Logout</button>
 					</div>
 				</form>
 			<?php else : ?>
 				<form class="form-inline" method="POST" action="<?= site_url('auth/login') ?>">
-					<div class="nav-form">
+					<div class="nav-form bg-dark">
 						<input type="text" name="username" id="username-field" class="form-control" placeholder="Username">
 						<input type="password" name="password" id="password-field" class="form-control" placeholder="Password">
 						<button class="btn btn-outline-light" type="submit">Login</button>
