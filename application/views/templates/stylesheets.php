@@ -12,7 +12,7 @@
 
 	body {
 		font-family: 'Poppins', 'Montserrat', Arial, Helvetica, sans-serif;
-		padding-top: 120px;
+		padding-top: 100px;
 	}
 
 	.navbar {
