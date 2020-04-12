@@ -1,6 +1,7 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
 <style>
 	@import url('https://fonts.googleapis.com/css?family=Montserrat|Poppins&display=swap');
@@ -23,6 +24,18 @@
 		background: #343A40;
 		border: 2px solid rgb(150, 150, 150);
 		border-radius: 8px;
+	}
+
+	.nav-form .btn {
+		margin: 4px;
+		border-radius: 8px;
+		border: none;
+	}
+
+	.nav-form .logged-in {
+		color: white;
+		padding: 8px;
+		padding-left: 12px;
 	}
 
 	.nav-form input {

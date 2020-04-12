@@ -1,7 +1,7 @@
 <nav class="navbar navbar-light fixed-top navbar-expand-lg bg-light">
 	<div class="container">
 
-		<a class="navbar-brand" href="#">ServeHealth</a>
+		<a class="navbar-brand" href="#"><i class="fas fa-clinic-medical mr-2"></i>ServeHealth</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
@@ -20,15 +20,18 @@
 			</ul>
 			<?php if ($this->session->userdata('username')) : ?>
 				<form class="form-inline" method="POST" action="<?= site_url('auth/logout') ?>">
-					<button class="btn btn-outline-dark" type="submit">Logout</button>
+					<div class="nav-form">
+						<span class="logged-in">Welcome <?= $this->session->userdata('username') ?></span>
+						<button class="btn btn-outline-light" type="submit">Logout</button>
+					</div>
 				</form>
 			<?php else : ?>
 				<form class="form-inline" method="POST" action="<?= site_url('auth/login') ?>">
-					<div class="nav-form mr-2">
+					<div class="nav-form">
 						<input type="text" name="username" id="username-field" class="form-control" placeholder="Username">
 						<input type="password" name="password" id="password-field" class="form-control" placeholder="Password">
+						<button class="btn btn-outline-light" type="submit">Login</button>
 					</div>
-					<button class="btn btn-outline-dark" type="submit">Login</button>
 				</form>
 			<?php endif; ?>
 		</div>
