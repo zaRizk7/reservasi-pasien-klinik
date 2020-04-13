@@ -14,9 +14,11 @@
 				<li class="nav-item dropdown">
 					<a class="nav-link" href="#">Announcement</a>
 				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">Register</a>
-				</li>
+				<?php if (!$this->session->userdata('username')) : ?>
+					<li class="nav-item">
+						<a class="nav-link" href="#">Register</a>
+					</li>
+				<?php endif; ?>
 			</ul>
 			<?php if ($this->session->userdata('username')) : ?>
 				<form class="form-inline" method="POST" action="<?= site_url('auth/logout') ?>">

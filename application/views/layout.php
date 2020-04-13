@@ -12,7 +12,9 @@
 
 <body>
 	<?php $this->load->view('templates/header'); ?>
-	<?php $this->load->view($page); ?>
+	<div class="container">
+		<?php $this->load->view($page); ?>
+	</div>
 	<?php $this->load->view('templates/footer'); ?>
 	<?php $this->load->view('templates/scripts'); ?>
 </body>
