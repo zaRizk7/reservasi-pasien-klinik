@@ -15,7 +15,8 @@ class Admin_Model extends Base_Model
 
 	public function read_admin()
 	{
-		$select = 'admin_id as `id`, user.username, password, account_type, complete_name, place_of_birth, date_of_birth, phone_number, email, address, account_created';
+		$select = 'admin_id as `id`, user.username, password, account_type, complete_name, 
+		place_of_birth, date_of_birth, phone_number, email, address, account_created';
 		$this->db->select($select);
 		$this->db->join('user', 'user.username = admin.username');
 		return $this->read();
@@ -23,7 +24,8 @@ class Admin_Model extends Base_Model
 
 	public function read_by_username($username)
 	{
-		$select = 'admin_id as `id`, user.username, password, account_type, complete_name, place_of_birth, date_of_birth, phone_number, email, address, account_created';
+		$select = 'admin_id as `id`, user.username, password, account_type, complete_name, 
+		place_of_birth, date_of_birth, phone_number, email, address, account_created';
 		$this->db->select($select);
 		$this->db->join('user', 'user.username = admin.username');
 		$this->db->where('user.username', $username);

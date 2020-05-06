@@ -59,32 +59,26 @@
 <div class="container mt-lg-3">
 	<h4 class="text-center">Lets see what they said about ServeHealth!</h4>
 	<hr>
-	<div class="row">
-		<div class="col-lg-3 mx-auto">
-			<div class="card">
-				<div class="card-body">
-					<h5 class="card-title">Rizky Muhammad</h5>
-					<h6 class="card-subtitle mb-2 text-muted">Absolutely Responsive!</h6>
-					<p class="card-text">This website really helped me communicate with my doctor!.</p>
-				</div>
+	<div class="card-group">
+		<div class="card">
+			<div class="card-body">
+				<h5 class="card-title">Rizky Muhammad</h5>
+				<h6 class="card-subtitle mb-2 text-muted">Absolutely Responsive!</h6>
+				<p class="card-text">This website really helped me communicate with my doctor!.</p>
 			</div>
 		</div>
-		<div class="col-lg-3 mx-auto">
-			<div class="card">
-				<div class="card-body">
-					<h5 class="card-title">Putra Abdullah</h5>
-					<h6 class="card-subtitle mb-2 text-muted">Fast!</h6>
-					<p class="card-text">Truly helped me when I need to reserve ASAP! Thank You ServeHealth!</p>
-				</div>
+		<div class="card">
+			<div class="card-body">
+				<h5 class="card-title">Putra Abdullah</h5>
+				<h6 class="card-subtitle mb-2 text-muted">Fast!</h6>
+				<p class="card-text">Truly helped me when I need to reserve ASAP! Thank You ServeHealth!</p>
 			</div>
 		</div>
-		<div class="col-lg-3 mx-auto">
-			<div class="card">
-				<div class="card-body">
-					<h5 class="card-title">Anastasia Putri</h5>
-					<h6 class="card-subtitle mb-2 text-muted">Live Saver!</h6>
-					<p class="card-text">Absoulutely useful when I need to do checkups! Really awesome work!</p>
-				</div>
+		<div class="card">
+			<div class="card-body">
+				<h5 class="card-title">Anastasia Putri</h5>
+				<h6 class="card-subtitle mb-2 text-muted">Live Saver!</h6>
+				<p class="card-text">Absoulutely useful when I need to do checkups! Really awesome work!</p>
 			</div>
 		</div>
 	</div>

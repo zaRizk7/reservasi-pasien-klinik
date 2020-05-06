@@ -8,6 +8,14 @@ class Base_Controller extends CI_Controller
 		parent::__construct();
 	}
 
+	public function auth()
+	{
+		if (!$this->session->userdata('login')) {
+			$this->session->set_flashdata('failure', 'Must access to login!');
+			redirect();
+		}
+	}
+
 	public function auth_admin()
 	{
 		if (!$this->session->userdata('login') || $this->session->userdata('login')['account_type'] !== 'admin') {

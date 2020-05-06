@@ -1,8 +1,11 @@
 <table id="schedule-table" class="table table-striped table-bordered" width="100%">
 	<thead class="thead-dark">
 		<th>No</th>
-		<th>Doctor ID</th>
-		<th>Doctor</th>
+		<?php if ($this->session->userdata('login')['account_type'] === 'admin') : ?>
+			<th>Schedule ID</th>
+			<th>Doctor ID</th>
+			<th>Name</th>
+		<?php endif; ?>
 		<th>Day</th>
 		<th>Start Time</th>
 		<th>Finish Time</th>
@@ -164,14 +167,18 @@
 			let isAdmin = '<?= $this->session->userdata('login')['account_type'] ?>' === 'admin';
 			$.each(data, (i, schedule) => {
 				$(`<tr id="${schedule.doctor_id}-${schedule.schedule_id}">`).append(
-					$(`<td id="${schedule.schedule_id}-no-id">`).text(i + 1),
-					$(`<td id="${schedule.schedule_id}-schedule-id">`).text(schedule.doctor_id),
-					$(`<td id="${schedule.schedule_id}-doctor-id">`).text(schedule.name),
+					$(`<td id="${schedule.schedule_id}-no">`).text(i + 1),
 					$(`<td id="${schedule.schedule_id}-day">`).text(schedule.day),
-					$(`<td id="${schedule.schedule_id}-doctor-name">`).text(schedule.start_time),
-					$(`<td id="${schedule.schedule_id}-start-time">`).text(schedule.finish_time),
+					$(`<td id="${schedule.schedule_id}-start-time">`).text(schedule.start_time),
+					$(`<td id="${schedule.schedule_id}-finish-time">`).text(schedule.finish_time),
 				).appendTo('#schedule-table-body');
 				if (isAdmin) {
+					$(`<td id="${schedule.schedule_id}-schedule-id">`).text(schedule.schedule_id)
+						.insertAfter(`#${schedule.schedule_id}-no`);
+					$(`<td id="${schedule.schedule_id}-doctor-name">`).text(schedule.name)
+						.insertAfter(`#${schedule.schedule_id}-schedule-id`);
+					$(`<td id="${schedule.schedule_id}-doctor-id">`).text(schedule.doctor_id)
+						.insertAfter(`#${schedule.schedule_id}-schedule-id`);
 					$(`<td id="${schedule.schedule_id}-action">`).append(
 							$('<div class="btn-group">').append(
 								$('<button>').attr({

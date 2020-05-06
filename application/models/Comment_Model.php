@@ -16,6 +16,16 @@ class Comment_Model extends Base_Model
 	public function read_by_comment_id($comment_id)
 	{
 		$this->db->where('comment_id', $comment_id);
+		return $this->read_one();
+	}
+
+	public function read_by_reservation_id($reservation_id)
+	{
+		$select = 'comment_id, comment_caption, comment_date, user.complete_name as `name`, reservation_id';
+		$this->db->select($select);
+		$this->db->join('user', 'user.username = comment.username');
+		$this->db->where('reservation_id', $reservation_id);
+		$this->db->order_by('comment_date', 'DESC');
 		return $this->read();
 	}
 

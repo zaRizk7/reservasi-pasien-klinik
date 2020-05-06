@@ -7,7 +7,7 @@
 html {
 	position: relative;
 	min-height: 100vh;
-	padding-top: 4.5rem;
+	padding-top: 4.25rem;
 	padding-bottom: 4.5rem;
 }
 
@@ -26,6 +26,11 @@ html {
 
 table {
 	white-space: nowrap;
+}
+
+#comments .card {
+	margin: 0.75rem;
+	border-radius: 20px;
 }
 
 #login-form input,

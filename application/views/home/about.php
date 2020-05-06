@@ -1,9 +1,9 @@
-<div class="container content">
+<div class="container-fluid content">
 	<h1>The teams behind ServeHealth!</h1>
 	<h4>IF-42-INT</h4>
 	<hr>
 
-	<div class="carousel carousel-fade slide" id="about-slide" data-ride="carousel">
+	<div class="container carousel carousel-fade slide" id="about-slide" data-ride="carousel">
 
 		<ol class="carousel-indicators">
 			<li data-target="#about-slide" data-slide-to="0" class="active"></li>

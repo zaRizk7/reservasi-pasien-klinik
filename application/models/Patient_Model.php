@@ -15,7 +15,8 @@ class Patient_Model extends Base_Model
 
 	public function read_patient()
 	{
-		$select = 'patient_id as `id`, user.username, password, account_type, complete_name, place_of_birth, date_of_birth, phone_number, email, address, account_created';
+		$select = 'patient_id as `id`, user.username, password, account_type, complete_name, 
+		place_of_birth, date_of_birth, phone_number, email, address, account_created';
 		$this->db->select($select);
 		$this->db->join('user', 'user.username = patient.username');
 		return $this->read();
@@ -23,7 +24,8 @@ class Patient_Model extends Base_Model
 
 	public function read_by_username($username)
 	{
-		$select = 'patient_id as `id`, user.username, password, account_type, complete_name, place_of_birth, date_of_birth, phone_number, email, address, account_created';
+		$select = 'patient_id as `id`, user.username, password, account_type, complete_name, 
+		place_of_birth, date_of_birth, phone_number, email, address, account_created';
 		$this->db->select($select);
 		$this->db->join('user', 'user.username = patient.username');
 		$this->db->where('user.username', $username);

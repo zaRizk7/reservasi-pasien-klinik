@@ -49,8 +49,7 @@ class Reservation extends Base_Controller
 			$data['reservation_date'] = Date('y:m:d', strtotime('next ' . $this->schedule_model->read_by_schedule_id($this->input->post('reservation_day'))['day']));
 			$this->reservation_model->create($data);
 			echo json_encode([
-				'message' => 'Reservation created successfully',
-				'doctor'
+				'message' => 'Reservation created successfully'
 			]);
 		} else {
 			echo json_encode([
@@ -73,6 +72,38 @@ class Reservation extends Base_Controller
 		} else {
 			$id = $this->doctor_model->read_by_username($this->session->userdata('login')['username'])['id'];
 			echo json_encode($this->reservation_model->read_by_doctor_id($id));
+		}
+	}
+
+	public function fetch_one($id)
+	{
+		$this->auth();
+		echo json_encode($this->reservation_model->read_by_reservation_id($id));
+	}
+
+	public function cancel_reservation()
+	{
+		$this->auth();
+		$data = ['reservation_status' => 'cancelled'];
+		if ($this->reservation_model->update_reservation($this->input->post('reservation_id'), $data)) {
+			$this->session->set_flashdata('success', 'Reservation is cancelled!');
+		}
+	}
+
+	public function finish_reservation()
+	{
+		$this->auth();
+		$data = ['reservation_status' => 'finished'];
+		if ($this->reservation_model->update_reservation($this->input->post('reservation_id'), $data)) {
+			$this->session->set_flashdata('success', 'Reservation is finished!');
+		}
+	}
+
+	public function delete()
+	{
+		$this->auth();
+		if ($this->reservation_model->delete_reservation($this->input->post('reservation_id'))) {
+			$this->session->set_flashdata('success', 'Reservation successfully deleted!');
 		}
 	}
 
