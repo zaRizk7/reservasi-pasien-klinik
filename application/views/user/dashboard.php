@@ -31,7 +31,72 @@
 						<?php endif; ?>
 						<div id="reservation-table-container"></div>
 					</div>
-					<div class="tab-pane fade" id="document" role="tabpanel" aria-labelledby="document-tab">Document</div>
+					<div class="tab-pane fade" id="document" role="tabpanel" aria-labelledby="document-tab">
+						<div class="row">
+							<div class="col-xl-6">
+								<h4>Documents</h4>
+								<form action="" method="post" enctype="multipart/form-data">
+									<div class="form-group">
+										<label for="Portrait">Portrait</label>
+										<div class="input-group mb-3">
+											<div class="input-group-prepend">
+												<button class="btn btn-outline-dark" id="view-portrait">View</button>
+											</div>
+											<div class="custom-file">
+												<input type="file" class="custom-file-input" accept=".png, .jpg, .jpeg" id="upload-portrait-file">
+												<label class="custom-file-label" id="portrait-label" for="upload-portrait-file">Portrait Photo</label>
+											</div>
+											<div class="input-group-append">
+												<button class="btn btn-outline-dark" id="delete-portrait">Delete</button>
+												<button class="btn btn-dark" id="submit-portrait">Upload</button>
+											</div>
+										</div>
+									</div>
+								</form>
+								<form action="" method="post" enctype="multipart/form-data">
+									<div class="form-group">
+										<label for="Identity Card">Identity Card</label>
+										<div class="input-group mb-3">
+											<div class="input-group-prepend">
+												<button class="btn btn-outline-dark" id="view-id-card">View</button>
+											</div>
+											<div class="custom-file">
+												<input type="file" class="custom-file-input" accept=".pdf" id="upload-id-card-file">
+												<label class="custom-file-label" id="id-card-label" for="upload-id-card-file">Identity Card (.pdf)</label>
+											</div>
+											<div class="input-group-append">
+												<button class="btn btn-outline-dark" id="delete-id-card">Delete</button>
+												<button class="btn btn-dark" id="submit-id-card">Upload</button>
+											</div>
+										</div>
+									</div>
+								</form>
+								<form action="" method="post" enctype="multipart/form-data">
+									<div class="form-group">
+										<label for="Health Insurance">Health Insurance</label>
+										<div class="input-group mb-3">
+											<div class="input-group-prepend">
+												<button class="btn btn-outline-dark" id="view-health-insurance">View</button>
+											</div>
+											<div class="custom-file">
+												<input type="file" class="custom-file-input" accept=".pdf" id="upload-health-insurance-file">
+												<label class="custom-file-label" id="health-insurance-label" for="upload-health-insurance-file">Health Insurance (.pdf)</label>
+											</div>
+											<div class="input-group-append">
+												<button class="btn btn-outline-dark" id="delete-health-insurance">Delete</button>
+												<button class="btn btn-dark" id="submit-health-insurance">Upload</button>
+											</div>
+										</div>
+									</div>
+								</form>
+							</div>
+							<div class="col-xl-6">
+								<h4>Preview</h4>
+								<div id="document-preview">
+								</div>
+							</div>
+						</div>
+					</div>
 					<?php if ($this->session->userdata('login')['account_type'] === 'doctor') : ?>
 						<div class="tab-pane fade" id="doctor-schedule" role="tabpanel" aria-labelledby="doctor-schedule-tab"></div>
 					<?php endif; ?>
@@ -200,6 +265,137 @@
 				$('#personal-account-doctor-room-field').val(result.doctor_room);
 			}
 		});
+
+		$('.custom-file-input').change(function() {
+			var fileName = $(this).val().split('\\').pop();
+			if (fileName) {
+				$(this).siblings('.custom-file-label').addClass('selected').html(fileName);
+			} else {
+				$(this).siblings('.custom-file-label').addClass('selected').html('Choose file');
+			}
+		});
+
+
+
+		$('#submit-portrait').click((e) => {
+			e.preventDefault();
+			const formData = new FormData();
+			const portraitPhoto = $('#upload-portrait-file')[0].files[0];
+			formData.append('portrait_photo', portraitPhoto);
+			$.ajax({
+				type: 'POST',
+				url: '<?= site_url('document/upload_portrait') ?>',
+				data: formData,
+				contentType: false,
+				processData: false,
+				success: (result) => {
+					location.href = '<?= site_url('dashboard') ?>';
+				}
+			});
+		});
+
+		$('#submit-id-card').click((e) => {
+			e.preventDefault();
+			const formData = new FormData();
+			const identityCard = $('#upload-id-card-file')[0].files[0];
+			formData.append('identity_card', identityCard);
+			$.ajax({
+				type: 'POST',
+				url: '<?= site_url('document/upload_identity_card') ?>',
+				data: formData,
+				contentType: false,
+				processData: false,
+				success: (result) => {
+					location.href = '<?= site_url('dashboard') ?>';
+				}
+			});
+		});
+
+		$('#submit-health-insurance').click((e) => {
+			e.preventDefault();
+			const formData = new FormData();
+			const identityCard = $('#upload-health-insurance-file')[0].files[0];
+			formData.append('health_insurance', identityCard);
+			$.ajax({
+				type: 'POST',
+				url: '<?= site_url('document/upload_health_insurance') ?>',
+				data: formData,
+				contentType: false,
+				processData: false,
+				success: (result) => {
+					location.href = '<?= site_url('dashboard') ?>';
+				}
+			});
+		});
+
+		$('#view-portrait').click((e) => {
+			e.preventDefault();
+			$.ajax({
+				type: 'GET',
+				url: '<?= site_url("document/fetch/portrait-{$this->session->userdata('login')['username']}") ?>',
+				success: (result) => {
+					result = JSON.parse(result);
+					$('#document-preview').empty().append(
+						$('<img>').attr('src',
+							`<?= base_url('uploads/portrait_photo/') ?>${result.document_name}${result.document_format}`
+						),
+						$('<small class="text-muted text-center">').text(result.document_name)
+					);
+				}
+			});
+		});
+
+		$('#view-id-card').click((e) => {
+			e.preventDefault();
+			$.ajax({
+				type: 'GET',
+				url: '<?= site_url("document/fetch/id-card-{$this->session->userdata('login')['username']}") ?>',
+				success: (result) => {
+					result = JSON.parse(result);
+					$('#document-preview').empty().append(
+						$('<object>').attr({
+							data: `<?= base_url('uploads/identity_card/') ?>${result.document_name}${result.document_format}`,
+							type: 'application/pdf'
+						}),
+						$('<small class="text-muted text-center">').text(result.document_name)
+					);
+				}
+			});
+		});
+
+		$.ajax({
+			type: 'GET',
+			url: '<?= site_url("document/fetch/portrait-{$this->session->userdata('login')['username']}") ?>',
+			success: (result) => {
+				result = JSON.parse(result);
+				if (result) {
+					$('#portrait-label').text(result.document_name);
+				}
+			}
+		});
+
+		$.ajax({
+			type: 'GET',
+			url: '<?= site_url("document/fetch/id-card-{$this->session->userdata('login')['username']}") ?>',
+			success: (result) => {
+				result = JSON.parse(result);
+				if (result) {
+					$('#id-card-label').text(result.document_name);
+				}
+			}
+		});
+
+		$.ajax({
+			type: 'GET',
+			url: '<?= site_url("document/fetch/health-insurance-{$this->session->userdata('login')['username']}") ?>',
+			success: (result) => {
+				result = JSON.parse(result);
+				if (result) {
+					$('#health-insurance-label').text(result.document_name);
+				}
+			}
+		});
+
 		loadReservationTable();
 		loadDocumentManagement();
 		loadScheduleManagement();
