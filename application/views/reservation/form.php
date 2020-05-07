@@ -70,7 +70,6 @@
 			url: '<?= site_url('user/fetch/doctor') ?>',
 			success: (result) => {
 				result = JSON.parse(result);
-				console.log(result);
 				$.each(result.users, (i, doctor) => {
 					$('<option>').val(doctor.id).text(`${doctor.complete_name} - ${doctor.doctor_type}`)
 						.appendTo('#reservation-doctor-select');
@@ -83,7 +82,6 @@
 				url: `<?= site_url('schedule/fetch/') ?>${$('#reservation-doctor-select').val()}`,
 				success: (result) => {
 					result = JSON.parse(result);
-					console.log(result);
 					$('#reservation-day-select').empty();
 					$('<option>').val('').text('--Day--').attr('selected', 'selected')
 						.appendTo('#reservation-day-select');
@@ -109,7 +107,6 @@
 				},
 				success: (result) => {
 					result = JSON.parse(result);
-					console.log(result);
 					if (result.error) {
 						$('#reservation-doctor-alert').text(result.error.doctorId);
 						$('#reservation-day-alert').text(result.error.reservationDay);
@@ -122,7 +119,6 @@
 					}
 				}
 			})
-			console.log('a');
 		})
 	})
 </script>

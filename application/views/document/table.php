@@ -34,7 +34,6 @@
 <script>
 	$(() => {
 		$.getJSON('<?= site_url('document/fetch') ?>', (data) => {
-			console.log(data);
 			$.each(data, (i, document) => {
 				$('<tr>').append(
 					$('<td>').text(i + 1),
@@ -45,28 +44,42 @@
 					$('<td>').text(document.document_size),
 					$('<td>').text(document.username),
 					$('<td>').append(
-						$('<button class="btn btn-outline-dark">').append(
-							$('<i class="fas fa-trash">')
-						).attr({
-							'data-toggle': 'modal',
-							'data-target': '#document-delete'
-						}).click((e) => {
-							e.preventDefault();
-							$('#delete-document').click((e) => {
-								$.ajax({
-									type: 'POST',
-									url: '<?= site_url('document/delete') ?>',
-									data: {
-										document_name: document.document_name,
-										document_type: document.document_type
-									},
-									success: (result) => {
-										$('.modal-backdrop').remove();
-										$('#document-table-container').load('<?= site_url('document/table') ?>');
-									}
+						$('<div class="btn-group">').append(
+							$('<button class="btn btn-outline-dark">').append(
+								$('<i class="fas fa-eye">')
+							).click((e) => {
+								e.preventDefault();
+								if (document.document_type === 'portrait') {
+									document.document_type = 'portrait_photo';
+								}
+								const win = window.open(`<?= base_url('uploads/') ?>${document.document_type}/${document.document_name}${document.document_format}`, '_blank');
+								if (win) {
+									win.focus();
+								}
+							}),
+							$('<button class="btn btn-outline-dark">').append(
+								$('<i class="fas fa-trash">')
+							).attr({
+								'data-toggle': 'modal',
+								'data-target': '#document-delete'
+							}).click((e) => {
+								e.preventDefault();
+								$('#delete-document').click((e) => {
+									$.ajax({
+										type: 'POST',
+										url: '<?= site_url('document/delete') ?>',
+										data: {
+											document_name: document.document_name,
+											document_type: document.document_type
+										},
+										success: (result) => {
+											$('.modal-backdrop').remove();
+											$('#document-table-container').load('<?= site_url('document/table') ?>');
+										}
+									});
 								});
-							});
-						})
+							})
+						)
 					),
 				).appendTo('#document-table-content');
 			});

@@ -124,7 +124,6 @@
 			url: '<?= site_url('reservation/fetch') ?>',
 			success: (result) => {
 				result = JSON.parse(result);
-				console.log(result);
 				$.each(result, (i, reservation) => {
 					$(`<tr id="reservation-${i+1}">`).append(
 						$(`<td id="n-${i+1}">`).text(i + 1),
@@ -147,7 +146,6 @@
 									url: `<?= site_url('reservation/fetch_one/') ?>${reservation.id}`,
 									success: (result) => {
 										result = JSON.parse(result);
-										console.log(result);
 										if (reservation.reservation_status === 'cancelled' || reservation.reservation_status === 'finished') {
 											$('#comment-input').hide();
 											$('#reservation-finish-button').attr('disabled', true);

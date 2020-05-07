@@ -228,8 +228,6 @@
 				success: (result) => {
 					result = JSON.parse(result);
 					if (result.error) {
-						console.log(result.error);
-						console.log($('#personal-account-username-alert'))
 						$('#personal-account-username-alert').text(result.error.username);
 						$('#personal-account-password-alert').text(result.error.password);
 						$('#personal-account-name-alert').text(result.error.completeName);
@@ -250,7 +248,6 @@
 			url: '<?= site_url('user/fetch_login_data') ?>',
 			success: (result) => {
 				result = JSON.parse(result);
-				console.log(result);
 				$('#personal-account-id').val(result.id);
 				$('#personal-account-username-field').val(result.username);
 				$('#personal-account-password-field').val(result.password);

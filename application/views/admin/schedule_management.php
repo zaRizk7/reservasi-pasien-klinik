@@ -67,7 +67,6 @@
 	$(() => {
 		$('#schedule-table-container').load('<?= site_url('schedule/table') ?>');
 		$.getJSON('<?= site_url('user/fetch/doctor') ?>', (data) => {
-			console.log(data);
 			$.each(data.users, (i, doctor) => {
 				$('<option>').val(doctor.id)
 					.text(`${doctor.id} - ${doctor.complete_name}`)
@@ -87,7 +86,6 @@
 				},
 				success: (result) => {
 					result = JSON.parse(result);
-					console.log(result);
 					if (result.error) {
 						$('#schedule-doctor-id-alert').text(result.error.doctorId);
 						$('#schedule-day-alert').text(result.error.day);

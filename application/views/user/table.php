@@ -120,7 +120,6 @@
 				type: 'GET',
 				success: result => {
 					result = JSON.parse(result);
-					console.log(result);
 					$('#<?= $account_type ?>-id-update').val(result.id);
 					$('#<?= $account_type ?>-username-field-update').val(result.username);
 					$('#<?= $account_type ?>-password-field-update').val(result.password);
@@ -157,7 +156,6 @@
 					},
 					success: (result) => {
 						result = JSON.parse(result);
-						console.log(result)
 						if (result.error) {
 							$('#<?= $account_type ?>-username-alert-update').text(result.error.username);
 							$('#<?= $account_type ?>-password-alert-update').text(result.error.password);
@@ -194,7 +192,6 @@
 			});
 		}
 		$.getJSON('<?= site_url("user/fetch/{$account_type}") ?>', (data) => {
-			console.log(data);
 			$.each(data.users, (i, user) => {
 				$(`<tr id="${data.account_type}-${user.id}">`).append(
 					$(`<td id="${data.account_type}-${user.id}-n">`).text(i + 1),

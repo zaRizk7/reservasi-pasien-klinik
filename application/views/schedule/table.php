@@ -108,7 +108,6 @@
 				type: 'GET',
 				success: result => {
 					result = JSON.parse(result);
-					console.log(result);
 					$('#schedule-id-update').val(result.schedule_id);
 					$('#schedule-day-update-field').val(result.day);
 					$('#schedule-start-time-update-field').val(result.start_time);
@@ -130,7 +129,6 @@
 					},
 					success: (result) => {
 						result = JSON.parse(result);
-						console.log(result)
 						if (result.error) {
 							$('#schedule-day-update-alert').text(result.error.day);
 							$('#schedule-start-time-update-alert').text(result.error.startTime);
@@ -155,7 +153,6 @@
 					},
 					success: (result) => {
 						result = JSON.parse(result);
-						console.log(result);
 						$('.modal-backdrop').remove();
 						$('#schedule-table-container').load('<?= site_url("schedule/table") ?>');
 					}
@@ -163,7 +160,6 @@
 			});
 		}
 		$.getJSON('<?= site_url("schedule/fetch/{$doctor_id}") ?>', (data) => {
-			console.log(data);
 			let isAdmin = '<?= $this->session->userdata('login')['account_type'] ?>' === 'admin';
 			$.each(data, (i, schedule) => {
 				$(`<tr id="${schedule.doctor_id}-${schedule.schedule_id}">`).append(

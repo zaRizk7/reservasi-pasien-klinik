@@ -3,7 +3,6 @@
 	$(() => {
 		const isDoctor = '<?= $this->session->userdata('login')['account_type'] ?>' === 'doctor'
 		$.getJSON('<?= site_url("comment/fetch/{$id}") ?>', (data) => {
-			console.log(data);
 			$.each(data, (i, comment) => {
 				$(`<div class="card text-white bg-dark" id="${comment.comment_id}-comment-card">`).append(
 					$('<div class="card-body">').append(
