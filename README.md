@@ -1,5 +1,5 @@
 # Web app for doctor reservation
-<p>Web programming final project with patient reservation topic</p>
+<h5>Web programming final project with patient reservation topic</h5>
 <hr>
 <strong>Requirements:</strong>
 <ol>
