@@ -12,16 +12,19 @@ class Comment extends Base_Controller
 
 	public function index($reservation_id)
 	{
+		$this->auth();
 		$this->load->view('reservation/comment', ['id' => $reservation_id]);
 	}
 
 	public function load_comment($reservation_id)
 	{
+		$this->auth();
 		$this->load->view('reservation/comment', ['id' => $reservation_id]);
 	}
 
 	public function fetch($reservation_id = null)
 	{
+		$this->auth();
 		if ($reservation_id === null) {
 			echo json_encode($this->comment_model->read());
 		} else {
@@ -31,6 +34,7 @@ class Comment extends Base_Controller
 
 	public function create()
 	{
+		$this->auth();
 		$this->form_validation->set_rules('comment_caption', 'Caption', 'required');
 
 		$data = [

@@ -14,11 +14,6 @@ class User extends Base_Controller
 		$this->load->model('admin_model');
 	}
 
-	public function index()
-	{
-		$this->display('ServeHealth - The Clinic Reservation Service', 'home/index');
-	}
-
 	public function login()
 	{
 		$username = $this->input->post('username');
@@ -46,6 +41,7 @@ class User extends Base_Controller
 
 	public function fetch($role = null)
 	{
+		$this->auth();
 		$data = [
 			'account_type' => $role
 		];
@@ -74,10 +70,7 @@ class User extends Base_Controller
 
 	public function fetch_login_data()
 	{
-		if (!$this->session->userdata('login')) {
-			$this->session->set_flashdata('failure', 'Not allowed, please login!');
-			redirect();
-		}
+		$this->auth();
 		if ($this->session->userdata('login')['account_type'] ===  'doctor') {
 			echo json_encode($this->doctor_model->read_by_username($this->session->userdata('login')['username']));
 		} elseif ($this->session->userdata('login')['account_type'] ===  'admin') {
@@ -186,6 +179,7 @@ class User extends Base_Controller
 
 	public function update()
 	{
+		$this->auth();
 		$account_type = $this->input->post('account_type');
 		$this->user_validation();
 		if ($account_type === 'doctor') {
@@ -246,17 +240,20 @@ class User extends Base_Controller
 
 	public function delete()
 	{
+		$this->auth();
 		echo json_encode(['success' => $this->user_model->delete_user($this->input->post('username'))]);
 	}
 
 	public function logout()
 	{
+		$this->auth();
 		$this->session->unset_userdata('login');
 		$this->session->set_flashdata('success', 'Successfully Logout!');
 	}
 
 	public function table($role = 'patient')
 	{
+		$this->auth();
 		if ($role === 'patient') {
 			$this->load->view('user/table', [
 				'account_type' => 'patient'

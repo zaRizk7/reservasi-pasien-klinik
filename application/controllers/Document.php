@@ -24,6 +24,7 @@ class Document extends Base_Controller
 
 	public function upload_portrait()
 	{
+		$this->auth();
 		$config = [
 			'upload_path' => './uploads/portrait_photo/',
 			'allowed_types' => 'png|jpg|jpeg',
@@ -57,6 +58,7 @@ class Document extends Base_Controller
 
 	public function upload_identity_card()
 	{
+		$this->auth();
 		$config = [
 			'upload_path' => './uploads/identity_card/',
 			'allowed_types' => 'pdf',
@@ -90,6 +92,7 @@ class Document extends Base_Controller
 
 	public function upload_health_insurance()
 	{
+		$this->auth();
 		$config = [
 			'upload_path' => './uploads/health_insurance/',
 			'allowed_types' => 'pdf',
@@ -123,6 +126,7 @@ class Document extends Base_Controller
 
 	public function delete()
 	{
+		$this->auth();
 		$document_name = $this->input->post('document_name');
 		$document_type = $this->input->post('document_type');
 		$result = $this->document_model->read_by_name($document_name);
@@ -141,6 +145,7 @@ class Document extends Base_Controller
 
 	public function table()
 	{
+		$this->auth();
 		$this->load->view('document/table', [
 			'docs' => $this->document_model->read()
 		]);
@@ -148,6 +153,7 @@ class Document extends Base_Controller
 
 	public function admin_management()
 	{
+		$this->auth();
 		$this->load->view('admin/document_management', [
 			'user' => $this->user_model->read(),
 			'document' => $this->document_model->read()

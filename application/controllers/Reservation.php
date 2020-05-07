@@ -15,11 +15,13 @@ class Reservation extends Base_Controller
 
 	public function admin_management()
 	{
+		$this->auth_admin();
 		$this->load->view('admin/schedule_management');
 	}
 
 	public function create()
 	{
+		$this->auth();
 		$this->form_validation->set_rules('doctor_id', 'Doctor ID', 'required');
 		$this->form_validation->set_rules('reservation_day', 'Day', 'required');
 		$this->form_validation->set_rules('reservation_time', 'Reservation time', 'required');
@@ -66,6 +68,7 @@ class Reservation extends Base_Controller
 
 	public function fetch()
 	{
+		$this->auth();
 		if ($this->session->userdata('login')['account_type'] === 'patient') {
 			$id = $this->patient_model->read_by_username($this->session->userdata('login')['username'])['id'];
 			echo json_encode($this->reservation_model->read_by_patient_id($id));
@@ -116,6 +119,7 @@ class Reservation extends Base_Controller
 
 	public function table()
 	{
+		$this->auth();
 		$this->load->view('reservation/table');
 	}
 }

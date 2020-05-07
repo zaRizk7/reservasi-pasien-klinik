@@ -13,6 +13,7 @@ class Schedule extends Base_Controller
 
 	public function admin_management()
 	{
+		$this->auth_admin();
 		$this->load->view('admin/schedule_management', [
 			'doctor_data' => $this->doctor_model->read_doctor(),
 			'schedule' => $this->schedule_model->read()
@@ -21,6 +22,7 @@ class Schedule extends Base_Controller
 
 	public function table()
 	{
+		$this->auth();
 		$this->load->view('schedule/table', [
 			'doctor_id' => $this->session->userdata('login')['account_type'] !== 'doctor' ? null
 				: $this->session->userdata('login')['doctor_id']
@@ -29,6 +31,7 @@ class Schedule extends Base_Controller
 
 	public function fetch($doctor_id = null)
 	{
+		$this->auth();
 		if ($this->session->userdata('login') && $doctor_id != null) {
 			echo json_encode($this->schedule_model->read_by_doctor_id($doctor_id));
 			exit();
@@ -50,6 +53,7 @@ class Schedule extends Base_Controller
 
 	public function create()
 	{
+		$this->auth_admin();
 		$this->form_validation->set_rules('doctor_id', 'Doctor ID', 'required');
 		$this->form_validation->set_rules('day', 'Day', 'required');
 		$this->form_validation->set_rules('start_time', 'Start time', 'required');
@@ -81,6 +85,7 @@ class Schedule extends Base_Controller
 
 	public function update()
 	{
+		$this->auth_admin();
 		$this->form_validation->set_rules('day', 'Day', 'required');
 		$this->form_validation->set_rules('start_time', 'Start time', 'required');
 		$this->form_validation->set_rules('finish_time', 'Finish time', 'required');
@@ -109,6 +114,7 @@ class Schedule extends Base_Controller
 
 	public function delete()
 	{
+		$this->auth_admin();
 		echo json_encode(['success' => $this->schedule_model->delete_schedule($this->input->post('schedule_id'))]);
 	}
 }

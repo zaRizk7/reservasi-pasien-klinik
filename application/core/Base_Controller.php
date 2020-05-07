@@ -11,7 +11,7 @@ class Base_Controller extends CI_Controller
 	public function auth()
 	{
 		if (!$this->session->userdata('login')) {
-			$this->session->set_flashdata('failure', 'Must access to login!');
+			$this->session->set_flashdata('failure', 'Must login to access!');
 			redirect();
 		}
 	}
