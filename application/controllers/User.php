@@ -95,7 +95,7 @@ class User extends Base_Controller
 	private function user_validation()
 	{
 		$this->form_validation->set_rules('username', 'Username', 'required|min_length[6]|max_length[10]');
-		$this->form_validation->set_rules('password', 'Password', 'required|min_length[8]|max_length[20]');
+		$this->form_validation->set_rules('password', 'Password', 'required|min_length[8]');
 		$this->form_validation->set_rules('complete_name', 'Complete name', 'required|max_length[40]');
 		$this->form_validation->set_rules('place_of_birth', 'Place of birth', 'required|max_length[20]');
 		$this->form_validation->set_rules('date_of_birth', 'Date of birth', 'required');
