@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 07, 2020 at 06:07 AM
+-- Generation Time: May 07, 2020 at 04:22 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.1
 
@@ -48,11 +48,18 @@ INSERT INTO `admin` (`username`, `admin_id`) VALUES
 
 CREATE TABLE `comment` (
   `comment_id` varchar(5) NOT NULL,
-  `comment_caption` varchar(5) DEFAULT NULL,
+  `comment_caption` varchar(50) DEFAULT NULL,
   `comment_date` datetime NOT NULL,
   `reservation_id` varchar(5) DEFAULT NULL,
   `username` varchar(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `comment`
+--
+
+INSERT INTO `comment` (`comment_id`, `comment_caption`, `comment_date`, `reservation_id`, `username`) VALUES
+('c0003', 'sakit hati pak dok', '2020-05-07 04:21:24', 'r0001', 'testpat');
 
 -- --------------------------------------------------------
 
@@ -89,6 +96,15 @@ CREATE TABLE `document` (
   `username` varchar(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `document`
+--
+
+INSERT INTO `document` (`document_id`, `document_type`, `document_name`, `document_format`, `document_size`, `username`) VALUES
+('f0001', 'portrait', 'portrait-testpat', '.jpg', 416, 'testpat'),
+('f0002', 'identity_card', 'id-card-testpat', '.pdf', 410, 'testpat'),
+('f0003', 'health_insurance', 'health-insurance-testpat', '.pdf', 13, 'testpat');
+
 -- --------------------------------------------------------
 
 --
@@ -105,7 +121,7 @@ CREATE TABLE `patient` (
 --
 
 INSERT INTO `patient` (`username`, `patient_id`) VALUES
-('patientest', 'p0001');
+('testpat', 'p0001');
 
 -- --------------------------------------------------------
 
@@ -122,6 +138,13 @@ CREATE TABLE `reservation` (
   `patient_id` varchar(5) DEFAULT NULL,
   `doctor_id` varchar(5) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `reservation`
+--
+
+INSERT INTO `reservation` (`reservation_id`, `reservation_date`, `reservation_caption`, `reservation_time`, `reservation_status`, `patient_id`, `doctor_id`) VALUES
+('r0001', '2020-05-11', 'Saya sakit pak dok', '10:00:00', 'cancelled', 'p0001', 'd0001');
 
 -- --------------------------------------------------------
 
@@ -168,9 +191,9 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`username`, `password`, `account_type`, `complete_name`, `place_of_birth`, `date_of_birth`, `phone_number`, `email`, `address`, `account_created`) VALUES
-('patientest', '$2y$10$FLroaQdTtr2/bx2Q/d5gm.B/oD9aIfgEB/sZAyr4xSgn2KoexuIe6', 'patient', 'test_patient', 'djakarta', '2001-01-01', '08123456789', 'zar@gmail.com', 'mataram', '2020-05-07 05:28:09'),
-('testadmin', '$2y$10$LAHBTkpipzJrbOHb7KFc5OQk7NuwV8XSaqstrAVpBFXOwS0v7ESoG', 'admin', 'test_admin', 'bantoen', '2001-01-01', '08123456789', 'zar@gmail.com', 'mataram', '2020-05-07 05:30:24'),
-('testdoc', '$2y$10$qIWZ8DuqhN5N.EsztFvUYuWpTr6zaClzV3oratEWOk6dYgyGNTSlG', 'doctor', 'test_doctor', 'bandoeng', '2001-01-01', '08123456789', 'zar@gmail.com', 'mataram', '2020-05-07 05:29:17');
+('testadmin', '$2y$10$Mx0jEtSt4RHjuaFVgS8vo.2BolYBRdP6El6qFRMEFiKf2fwhSc/xC', 'admin', 'test_admin', 'bantoen', '2001-01-01', '08123456789', 'zar@gmail.com', 'mataram', '2020-05-07 15:47:36'),
+('testdoc', '$2y$10$qIWZ8DuqhN5N.EsztFvUYuWpTr6zaClzV3oratEWOk6dYgyGNTSlG', 'doctor', 'test_doctor', 'bandoeng', '2001-01-01', '08123456789', 'zar@gmail.com', 'mataram', '2020-05-07 05:29:17'),
+('testpat', '$2y$10$QLtXbn5dCAYr/fPvXNYSq.aur2ZY/45bQts4YXSwhuwUraDFgO1L6', 'patient', 'test_patient', 'soekapoera', '2001-01-01', '08123456789', 'zar@gmail.com', 'mataram', '2020-05-07 07:02:33');
 
 --
 -- Indexes for dumped tables
