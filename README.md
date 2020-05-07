@@ -8,5 +8,5 @@
     <li>Using Bootstrap</li>
     <li>Data from database loaded as JSON</li>
   <ol>
-    <a href="https://github.com/zaRizk7/reservasi-pasien-klinik/tree/siap-submit">Click to chech for the finished version</a>
+  <a href="https://github.com/zaRizk7/reservasi-pasien-klinik/tree/siap-submit">Click to chech for the finished version</a>
 </p>
