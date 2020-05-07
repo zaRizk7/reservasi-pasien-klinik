@@ -1,5 +1,6 @@
 # Web app for doctor reservation
 <p>Web programming final project with patient reservation topic</p>
+<hr>
 <strong>Requirements:</strong>
 <ol>
   <li>CodeIgniter Framework (version 3.*)</li>
