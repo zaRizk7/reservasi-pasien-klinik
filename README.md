@@ -1,4 +1,4 @@
-# Web app for doctor reservation
+# Web App for Doctor Reservation
 <h3>Web programming final project with patient reservation topic</h3>
 <hr>
 <strong>Requirements:</strong>
