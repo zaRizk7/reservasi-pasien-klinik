@@ -125,14 +125,17 @@ class Document extends Base_Controller
 	{
 		$document_name = $this->input->post('document_name');
 		$document_type = $this->input->post('document_type');
-		if ($this->document_model->delete_document($document_name)) {
+		$result = $this->document_model->read_by_name($document_name);
+		if ($result != null) {
 			if ($document_type === 'portrait') {
-				unlink("./uploads/portrait_photo/{$document_name}");
+				unlink("./uploads/portrait_photo/{$document_name}{$result['document_format']}");
 			} elseif ($document_type === 'identity_card') {
-				unlink("./uploads/identity_card/{$document_name}");
+				unlink("./uploads/identity_card/{$document_name}{$result['document_format']}");
 			} else {
-				unlink("./uploads/health_insurance/{$document_name}");
+				unlink("./uploads/health_insurance/{$document_name}{$result['document_format']}");
 			}
+			$this->document_model->delete_document($document_name);
+			$this->session->set_flashdata('success', 'Document successfully deleted!');
 		}
 	}
 

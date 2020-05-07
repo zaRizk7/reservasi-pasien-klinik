@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 02, 2020 at 09:52 AM
+-- Generation Time: May 07, 2020 at 06:07 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.1
 
@@ -38,8 +38,7 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`username`, `admin_id`) VALUES
-('admintest', 'a0001'),
-('testadmin', 'a0002');
+('testadmin', 'a0001');
 
 -- --------------------------------------------------------
 
@@ -50,6 +49,7 @@ INSERT INTO `admin` (`username`, `admin_id`) VALUES
 CREATE TABLE `comment` (
   `comment_id` varchar(5) NOT NULL,
   `comment_caption` varchar(5) DEFAULT NULL,
+  `comment_date` datetime NOT NULL,
   `reservation_id` varchar(5) DEFAULT NULL,
   `username` varchar(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -72,8 +72,7 @@ CREATE TABLE `doctor` (
 --
 
 INSERT INTO `doctor` (`username`, `doctor_id`, `doctor_type`, `doctor_room`) VALUES
-('doctor44', 'd0001', 'specialist', '3042'),
-('doctorXD', 'd0002', 'general', '1323');
+('testdoc', 'd0001', 'Specialist', '0342');
 
 -- --------------------------------------------------------
 
@@ -83,8 +82,8 @@ INSERT INTO `doctor` (`username`, `doctor_id`, `doctor_type`, `doctor_room`) VAL
 
 CREATE TABLE `document` (
   `document_id` varchar(5) NOT NULL,
-  `document_type` varchar(10) DEFAULT NULL,
-  `document_name` varchar(10) DEFAULT NULL,
+  `document_type` varchar(20) DEFAULT NULL,
+  `document_name` varchar(50) DEFAULT NULL,
   `document_format` varchar(10) DEFAULT NULL,
   `document_size` int(11) DEFAULT NULL,
   `username` varchar(10) DEFAULT NULL
@@ -106,10 +105,7 @@ CREATE TABLE `patient` (
 --
 
 INSERT INTO `patient` (`username`, `patient_id`) VALUES
-('pasien44', 'p0001'),
-('lordkazuma', 'p0002'),
-('patient72', 'p0003'),
-('pasien11', 'p0004');
+('patientest', 'p0001');
 
 -- --------------------------------------------------------
 
@@ -126,15 +122,6 @@ CREATE TABLE `reservation` (
   `patient_id` varchar(5) DEFAULT NULL,
   `doctor_id` varchar(5) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `reservation`
---
-
-INSERT INTO `reservation` (`reservation_id`, `reservation_date`, `reservation_caption`, `reservation_time`, `reservation_status`, `patient_id`, `doctor_id`) VALUES
-('r0001', '2020-05-08', 'fox jumps over', '12:00:00', 'reserved', 'p0003', 'd0001'),
-('r0002', '2020-05-08', 'abc\n', '16:30:00', 'reserved', 'p0003', 'd0001'),
-('r0003', '2020-05-08', 'wfqcsa', '11:00:00', 'reserved', 'p0003', 'd0001');
 
 -- --------------------------------------------------------
 
@@ -155,8 +142,7 @@ CREATE TABLE `schedule` (
 --
 
 INSERT INTO `schedule` (`schedule_id`, `day`, `start_time`, `finish_time`, `doctor_id`) VALUES
-('s0001', 'friday', '10:12:00', '12:17:00', 'd0001'),
-('s0002', 'friday', '16:00:00', '18:00:00', 'd0001');
+('s0001', 'monday', '09:30:00', '12:30:00', 'd0001');
 
 -- --------------------------------------------------------
 
@@ -166,7 +152,7 @@ INSERT INTO `schedule` (`schedule_id`, `day`, `start_time`, `finish_time`, `doct
 
 CREATE TABLE `user` (
   `username` varchar(10) NOT NULL,
-  `password` varchar(20) NOT NULL,
+  `password` varchar(65) NOT NULL,
   `account_type` varchar(10) NOT NULL,
   `complete_name` varchar(50) NOT NULL,
   `place_of_birth` varchar(20) NOT NULL,
@@ -182,15 +168,9 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`username`, `password`, `account_type`, `complete_name`, `place_of_birth`, `date_of_birth`, `phone_number`, `email`, `address`, `account_created`) VALUES
-('admintest', '12345678', 'admin', '12345678', '0123012930', '2000-05-20', '08123456789', 'zar@gmail.com', 'mataram', '2020-05-01 22:27:27'),
-('doctor44', '12345678', 'doctor', 'dokter', 'dokter', '2000-01-01', '08123456789', 'zar@gmail.com', 'mataram4', '2020-05-01 21:15:42'),
-('doctorXD', '12345678', 'doctor', 'kazuma sensei', 'nippon', '2000-11-11', '08123456789', 'zar@gmail.com', 'mataram', '2020-05-02 06:06:06'),
-('lordkazuma', 'kazumasan', 'patient', 'satou crapzuma', 'nippon', '2005-01-01', '08123456789', 'zar@gmail.com', 'mataram', '2020-05-01 15:23:32'),
-('pasien11', 'pasien123', 'patient', 'pasient empat tujuh', 'djakarta', '1998-02-20', '08123456789', 'zar@gmail.com', 'mataram', '2020-05-02 04:04:12'),
-('pasien44', '12345678', '', 'riza rizky', 'mtr', '2000-05-20', '08123456789', 'zar@gmail.com', 'matarama', '2020-05-01 09:15:14'),
-('patient72', '12345678', 'patient', 'patient72', 'patient72', '2000-05-20', '08123456789', 'zar@gmail.com', '4mataram5', '2020-05-01 15:23:35'),
-('testadmin', '12345678', 'admin', 'test_administrator', 'test', '2020-04-29', '08123456789', 'test@gmail.com', 'test_address', '2020-05-01 22:21:56'),
-('testpat', '123456', 'patient', 'patient', 'test', '2020-04-29', 'test', 'test', 'test', '2020-04-29 00:00:00');
+('patientest', '$2y$10$FLroaQdTtr2/bx2Q/d5gm.B/oD9aIfgEB/sZAyr4xSgn2KoexuIe6', 'patient', 'test_patient', 'djakarta', '2001-01-01', '08123456789', 'zar@gmail.com', 'mataram', '2020-05-07 05:28:09'),
+('testadmin', '$2y$10$LAHBTkpipzJrbOHb7KFc5OQk7NuwV8XSaqstrAVpBFXOwS0v7ESoG', 'admin', 'test_admin', 'bantoen', '2001-01-01', '08123456789', 'zar@gmail.com', 'mataram', '2020-05-07 05:30:24'),
+('testdoc', '$2y$10$qIWZ8DuqhN5N.EsztFvUYuWpTr6zaClzV3oratEWOk6dYgyGNTSlG', 'doctor', 'test_doctor', 'bandoeng', '2001-01-01', '08123456789', 'zar@gmail.com', 'mataram', '2020-05-07 05:29:17');
 
 --
 -- Indexes for dumped tables

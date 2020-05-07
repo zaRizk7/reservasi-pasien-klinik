@@ -23,8 +23,8 @@ class User extends Base_Controller
 	{
 		$username = $this->input->post('username');
 		$password = $this->input->post('password');
-		$result = $this->user_model->login($username, $password);
-		if ($result) {
+		$result = $this->user_model->read_by_username($username);
+		if (password_verify($password, $result['password'])) {
 			if ($result['account_type'] === 'doctor') {
 				$doctor_data = $this->doctor_model->read_by_username($username);
 				$this->session->set_userdata('login', [
@@ -115,7 +115,7 @@ class User extends Base_Controller
 		$username = $this->input->post('username');
 		$data = [
 			'username' => $username,
-			'password' => $this->input->post('password'),
+			'password' => password_hash($this->input->post('password'), PASSWORD_BCRYPT),
 			'account_type' => $account_type,
 			'complete_name' => $this->input->post('complete_name'),
 			'place_of_birth' => $this->input->post('place_of_birth'),
@@ -195,7 +195,7 @@ class User extends Base_Controller
 		$username = $this->input->post('username');
 		$data = [
 			'username' => $username,
-			'password' => $this->input->post('password'),
+			'password' => password_hash($this->input->post('password'), PASSWORD_BCRYPT),
 			'account_type' => $account_type,
 			'complete_name' => $this->input->post('complete_name'),
 			'place_of_birth' => $this->input->post('place_of_birth'),

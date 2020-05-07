@@ -14,12 +14,6 @@ class User_Model extends Base_Model
 		return $this->read_one();
 	}
 
-	public function login($username, $password)
-	{
-		$this->db->where('password', $password);
-		return $this->read_by_username($username);
-	}
-
 	public function update_user($username, $data)
 	{
 		$this->db->where('username', $username);

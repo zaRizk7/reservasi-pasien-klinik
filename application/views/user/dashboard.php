@@ -275,8 +275,6 @@
 			}
 		});
 
-
-
 		$('#submit-portrait').click((e) => {
 			e.preventDefault();
 			const formData = new FormData();
@@ -363,6 +361,56 @@
 			});
 		});
 
+		$('#view-health-insurance').click((e) => {
+			e.preventDefault();
+			$.ajax({
+				type: 'GET',
+				url: '<?= site_url("document/fetch/health-insurance-{$this->session->userdata('login')['username']}") ?>',
+				success: (result) => {
+					result = JSON.parse(result);
+					if (result) {
+						$('#document-preview').empty().append(
+							$('<object>').attr({
+								data: `<?= base_url('uploads/health_insurance/') ?>${result.document_name}${result.document_format}`,
+								type: 'application/pdf'
+							}),
+							$('<small class="text-muted text-center">').text(result.document_name)
+						);
+					}
+				}
+			});
+		});
+
+		$('#delete-portrait').click((e) => {
+			e.preventDefault();
+			$.ajax({
+				type: 'POST',
+				url: '<?= site_url('document/delete') ?>',
+				data: {
+					document_name: 'portrait-<?= $this->session->userdata('login')['username'] ?>',
+					document_type: 'portrait'
+				},
+				success: (result) => {
+					location.href = '<?= site_url('dashboard') ?>'
+				}
+			});
+		});
+
+		$('#delete-id-card').click((e) => {
+			e.preventDefault();
+			$.ajax({
+				type: 'POST',
+				url: '<?= site_url('document/delete') ?>',
+				data: {
+					document_name: 'id-card-<?= $this->session->userdata('login')['username'] ?>',
+					document_type: 'identity_card'
+				},
+				success: (result) => {
+					location.href = '<?= site_url('dashboard') ?>'
+				}
+			});
+		});
+
 		$.ajax({
 			type: 'GET',
 			url: '<?= site_url("document/fetch/portrait-{$this->session->userdata('login')['username']}") ?>',
@@ -370,6 +418,9 @@
 				result = JSON.parse(result);
 				if (result) {
 					$('#portrait-label').text(result.document_name);
+				} else {
+					$('#view-portrait').attr('disabled', true);
+					$('#delete-portrait').attr('disabled', true);
 				}
 			}
 		});
@@ -381,6 +432,9 @@
 				result = JSON.parse(result);
 				if (result) {
 					$('#id-card-label').text(result.document_name);
+				} else {
+					$('#view-id-card').attr('disabled', true);
+					$('#delete-id-card').attr('disabled', true);
 				}
 			}
 		});
@@ -392,6 +446,9 @@
 				result = JSON.parse(result);
 				if (result) {
 					$('#health-insurance-label').text(result.document_name);
+				} else {
+					$('#view-health-insurance').attr('disabled', true);
+					$('#delete-health-insurance').attr('disabled', true);
 				}
 			}
 		});
